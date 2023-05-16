@@ -12,6 +12,10 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
+    if (element === undefined) {
+      throw new Error('Ошибка');
+    }
+    this.element = element;
 
   }
 
@@ -23,6 +27,7 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
-
+    const currentUser = User.current();
+    const userPanel = App.getWidget('user-panel');
   }
 }
