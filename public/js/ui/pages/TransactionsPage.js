@@ -96,12 +96,12 @@ class TransactionsPage {
       return
     }
     this.lastOptions = options;
-    Account.get(this.lastOptions, (err, response) => {
+    Account.get(this.lastOptions.account_id, (err, response) => {
       if (response.success) {
         this.renderTitle(response.name);
       }
     });
-    Transaction.list(this.lastOptions, (err, response) => {
+    Transaction.list(this.lastOptions.account_id, (err, response) => {
       if (response.success) {
         this.renderTransactions(response.data);
       }
