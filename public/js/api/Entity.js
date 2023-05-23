@@ -11,10 +11,10 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static list(data, callback){
+    console.log(data)
     createRequest({
-      url: this.url,
+      url: this.url + '?' + `account_id=${data}`,
       method: 'GET',
-      data: data,
       callback: callback
     });
   }
