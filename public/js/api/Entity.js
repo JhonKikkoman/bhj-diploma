@@ -10,13 +10,24 @@ class Entity {
    * Это могут быть счета или доходы/расходы
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static list(data, callback){
-    console.log(data)
-    createRequest({
-      url: this.url + '?' + `account_id=${data}`,
-      method: 'GET',
-      callback: callback
-    });
+  static list(data, callback) {
+    const currentAccount = this.url + '/' + data.id;
+    const currrentTransaction = this.url + '?account_id=' + data;
+    if (this.url === '/account') {
+      createRequest({
+        url: currentAccount,
+        method: 'GET',
+        data,
+        callback: callback
+      });
+    } else {
+      createRequest({
+        url: currrentTransaction,
+        method: 'GET',
+        data,
+        callback: callback
+      });
+    }
   }
 
   /**
@@ -37,7 +48,7 @@ class Entity {
    * Удаляет информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static remove(data, callback ) {
+  static remove(data, callback) {
     createRequest({
       url: this.url,
       method: 'DELETE',
