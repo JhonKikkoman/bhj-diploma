@@ -11,23 +11,28 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static list(data, callback) {
-    const currentAccount = this.url + '/' + data.id;
-    const currrentTransaction = this.url + '?account_id=' + data;
+    console.log(this.url)
+    console.log(data)
+    console.log(data.id)
+    let newUrl = this.url;
     if (this.url === '/account') {
-      createRequest({
-        url: currentAccount,
-        method: 'GET',
-        data,
-        callback: callback
-      });
-    } else {
-      createRequest({
-        url: currrentTransaction,
-        method: 'GET',
-        data,
-        callback: callback
-      });
+      newUrl += '/' + data.id;
     }
+    if (this.url === '/transaction') {
+      newUrl += '?account_id=' + data;
+    }
+    console.log(newUrl)
+    // createRequest({
+    //   url: newUrl,
+    //   method: 'GET',
+    //   callback: callback
+    // });
+    createRequest({
+      url: this.url,
+      method: 'GET',
+      callback: callback
+    });
+
   }
 
   /**
